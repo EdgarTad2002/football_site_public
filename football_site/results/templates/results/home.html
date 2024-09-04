@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeagueScore</title>
+    <link rel="stylesheet" href="{% static 'results/style.css' %}">
+    
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <img src="https://i.imgur.com/V9VWRcu.jpeg" alt="{{ match.home_team.name }} logo" class="site-logo">
+            <h1>LeagueScore</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="{% url 'premier_league' %}">Premier League</a></li>
+                    <li><a href="{% url 'la_liga' %}">La Liga</a></li>
+                    <li><a href="{% url 'favourite_games' %}">Favourite Games</a></li>
+                    <li><a href="#">Fixtures</a></li>
+                    <li><a href="#">Results</a></li>
+                    <li><a href="#">Tables</a></li>
+                    {% if user.is_authenticated %}
+                    <li>Welcome, {{ user.username }}!</li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    
+                    {% endif %}
+                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Welcome to LeagueScore</h2>
+        <p>Get the latest results, fixtures, and tables for Premier League and La Liga</p>
+    </section>
+
+    <!-- League Panels -->
+    <section class="league-panels">
+        <!-- Premier League Panel -->
+        <div class="panel">
+            <td>
+                <div class="team-info">
+                    <img src="https://www.premierleague.com/resources/rebrand/v7.152.3/i/elements/pl-main-logo.png">
+                    <h3>Premier League</h4>
+                </div>
+            </td>
+            
+            <div class="panel-content">
+                <!-- Latest Results -->
+                <div class="section">
+                    <h4>Latest Matchday</h4>
+                    <ul>
+                        {% for match in premier_league_results %}
+                        <li>
+                            <span class="match">
+                                <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                                {% if match.home_score is not None and match.away_score is not None %}
+                                    {{ match.home_team.name }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team.name }}
+                                {% else %}
+                                    {{ match.home_team.name }} vs {{ match.away_team.name }}
+                                {% endif %}
+                                <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- Fixtures -->
+                <div class="section">
+                    <h4>Upcoming Matchday</h4>
+                    <ul>
+                        {% for match in premier_league_fixtures %}
+                        <li>
+                            <span class="match">
+                                <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                                {{ match.home_team.name }}  vs {{ match.away_team.name }}
+                                <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- Mini Table -->
+                <div class="section">
+                    <h4>Premier League table</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th>Games Played</th>
+                                <th>Wins</th>
+                                <th>Draws</th>
+                                <th>Losses</th>
+                                <th>Goals Scored</th>
+                                <th>Goals Conceded</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for team in premier_league_table %}
+                                <tr>
+                                    <td class="team-column">
+                                        <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" class="team-logo">
+                                        <br>
+                                        {{ team.name }}
+                                    </td>
+                                    <td>{{ team.games }}</td>
+                                    <td>{{ team.wins }}</td>
+                                    <td>{{ team.draws }}</td>
+                                    <td>{{ team.losses }}</td>
+                                    <td>{{ team.goals_for }}</td>
+                                    <td>{{ team.goals_against }}</td>
+                                    <td>{{ team.points }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- La Liga Panel -->
+        <div class="panel">
+            <td>
+                <div class="team-info">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAABHlJREFUeJztml2IVVUUx39rSBkyC5OCiEBfBNNeLAgTiejYg7umIpDKQfumjwchKkvCxMgKKgKfrCmZwqRvsDaVLQbLmkyFVJiipBgKIiow+tA+rN3DuTOMdu85a917TwadH9y3/157rXXXPmftvQ/U1NTU1NTU1NTU1NT8D5EqjKaQTQbmAz0G+SRgu0Q9VGCvBzgX6DW6MAnYJ1G/KRMeZzToZSWw1qjdAZxfolkCbHbM/wswDyhNQNcrIIVsLrAX278PMEWiHiywNx34DDjZ4cZiifqGRWh10sOQw25fUfANtuEL/lFr8NDlBKSQPQ6cYpQ/I1FfK7G3ApjrcGFUot7h0HcvASlkC4EVRvn+Mm0K2ZnAYw4XDgP9Dj3QpQSkkJ0AbHIM6ZeoPxTY6wGexeffOon6vkMPzgmKeBI4w6hdJVF3lmjWkz/FrQxJ1Psc+nE6TkAKWT9wpVE+IlEfLLEXgFsdLvwKXOvQH0FHCUghm0r+71s4BFxh0Hne9wDXSdQvnWPG6bQCBrF3Z/dK1E+LBClkm4CpjvmHJKo3YUfQdgJSyG4BLjfKX5CohU/0FLJrgKsdLnwNLHbom9JWAlLIZgMPGeXfAjeX2JsFPOJ04waJ+ptzzD9otwI2Aicatcsk6oESzQAw3TH/ek+3V4Q7ASlkK8l3ZhY2S9S3DPYWOlz4HLjdoS/EtRlqlP7HRvl+iTqri/bGOFWifucc0xJzBaSQHQ+8aJT/ASw32HvZOn+Du7sZPPiWwCpgjlG7RqJ+UKK5H5jtmP89ifqwQ2/CtARSyGYA+7C9o3dK1MJnRArZImCrZe4GPwNzOml4WmGtgAXYgv8LuKBIkEI2DftSGmN5FcGD/UhsmlG3ETirsb6bzXUQWA2cZLQHMCBRX3HoXVgT8KdRd33j14wvyM8BLjLaAvhRot7o0LuxLoGPOphjFOgj7x0873uwbZ46wpQAiboDeNVpew9wqUSd2Tj6eh1otjRasU6iqnNON57X4G2A5R28F7gYmCdRtwCkkK3F3j1CflRuPVbvCG8neB7Q6tjpK+AB4CmJenjCmPmNMda5fidP3ojHt3Zx7QUk6jB5AzORA8BNwAyJumFi8A224Ev0nf9W8NDmxUgK2fPkvcEaiTpQoBsEljlMD0nUC9vxqV3avRpbCkwuudHpwxf89/gORLpCVZejpwG7gNMdw5ZK1Oeq8KeIKq7GAJ7GF/zgsQgeqrkcvQxfzzAqUWd22w8rVVSA50wf8p7hmFHF9wHnOLRPSNSRFLKi88Ve4KeiDyg6oYolkKxS8h6i2Z8g5F959JJvne+SqKNdcfAoqqiA3diqQCi+93+H/B5xuCtetaCKBGzAtwyORskbLPdNbztU1QfsBs52DhsmD/ztClxqSVUfSS0hP0OcYtB+SF7qQxX5UkglFQDjX4y8WyDZA9wjUd+sygcLVXWCSNTtQLPvdXYBl5BveY9p8FBhBYyRQrYVWAR8AqyWqC9VPaeHqp4BE7kKWDB2OlRTU1NTU1NT81/hbx6WOVi9QQlkAAAAAElFTkSuQmCC">
+                    <h3>La Liga</h4>
+                </div>
+            </td>
+            <div class="panel-content">
+                <!-- Latest Results -->
+                <div class="section">
+                    <h4>Latest Matchday</h4>
+                    <ul>
+                        {% for match in la_liga_results %}
+                        <li>
+                        <span class="match">
+                            <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                            {{ match.home_team.name }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team.name }}
+                            <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                        </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- Fixtures -->
+                <div class="section">
+                    <h4>Upcoming Matchday</h4>
+                    <ul>
+                        {% for match in la_liga_fixtures %}
+                        <li>
+                        <span class="match">
+                            <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                            {{ match.home_team.name }} vs {{ match.away_team.name }}
+                            <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                        </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- Mini Table -->
+                <div class="section">
+                    <h4>La Liga table</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th>Games Played</th>
+                                <th>Wins</th>
+                                <th>Draws</th>
+                                <th>Losses</th>
+                                <th>Goals Scored</th>
+                                <th>Goals Conceded</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for team in la_liga_table %}
+                                <tr>
+                                    <td class="team-column">
+                                        <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" class="team-logo">
+                                        <br>
+                                        {{ team.name }}
+                                    </td>
+                                    
+                                    <td>{{ team.games }}</td>
+                                    <td>{{ team.wins }}</td>
+                                    <td>{{ team.draws }}</td>
+                                    <td>{{ team.losses }}</td>
+                                    <td>{{ team.goals_for }}</td>
+                                    <td>{{ team.goals_against }}</td>
+                                    <td>{{ team.points }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 LeagueScore. All rights reserved.</p>
+    </footer>
+</body>
+</html>

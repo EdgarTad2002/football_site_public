@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier League</title>
+    <link rel="stylesheet" href="{% static 'results/pl_styles.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'premier_league' %}">Premier League</a></li>
+            <li><a href="{% url 'favourite_games' %}">Favourite Games</a></li>
+            
+            {% if user.is_authenticated %}
+            <li>Welcome, {{ user.username }}!</li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+                
+            {% endif %}
+        
+        </ul>
+    </div>
+
+    <div class="container">
+        <!-- La Liga Table -->
+        <section class="league-table-section">
+            <td>
+                <div class="team-info">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAABHlJREFUeJztml2IVVUUx39rSBkyC5OCiEBfBNNeLAgTiejYg7umIpDKQfumjwchKkvCxMgKKgKfrCmZwqRvsDaVLQbLmkyFVJiipBgKIiow+tA+rN3DuTOMdu85a917TwadH9y3/157rXXXPmftvQ/U1NTU1NTU1NTU1NT8D5EqjKaQTQbmAz0G+SRgu0Q9VGCvBzgX6DW6MAnYJ1G/KRMeZzToZSWw1qjdAZxfolkCbHbM/wswDyhNQNcrIIVsLrAX278PMEWiHiywNx34DDjZ4cZiifqGRWh10sOQw25fUfANtuEL/lFr8NDlBKSQPQ6cYpQ/I1FfK7G3ApjrcGFUot7h0HcvASlkC4EVRvn+Mm0K2ZnAYw4XDgP9Dj3QpQSkkJ0AbHIM6ZeoPxTY6wGexeffOon6vkMPzgmKeBI4w6hdJVF3lmjWkz/FrQxJ1Psc+nE6TkAKWT9wpVE+IlEfLLEXgFsdLvwKXOvQH0FHCUghm0r+71s4BFxh0Hne9wDXSdQvnWPG6bQCBrF3Z/dK1E+LBClkm4CpjvmHJKo3YUfQdgJSyG4BLjfKX5CohU/0FLJrgKsdLnwNLHbom9JWAlLIZgMPGeXfAjeX2JsFPOJ04waJ+ptzzD9otwI2Aicatcsk6oESzQAw3TH/ek+3V4Q7ASlkK8l3ZhY2S9S3DPYWOlz4HLjdoS/EtRlqlP7HRvl+iTqri/bGOFWifucc0xJzBaSQHQ+8aJT/ASw32HvZOn+Du7sZPPiWwCpgjlG7RqJ+UKK5H5jtmP89ifqwQ2/CtARSyGYA+7C9o3dK1MJnRArZImCrZe4GPwNzOml4WmGtgAXYgv8LuKBIkEI2DftSGmN5FcGD/UhsmlG3ETirsb6bzXUQWA2cZLQHMCBRX3HoXVgT8KdRd33j14wvyM8BLjLaAvhRot7o0LuxLoGPOphjFOgj7x0873uwbZ46wpQAiboDeNVpew9wqUSd2Tj6eh1otjRasU6iqnNON57X4G2A5R28F7gYmCdRtwCkkK3F3j1CflRuPVbvCG8neB7Q6tjpK+AB4CmJenjCmPmNMda5fidP3ojHt3Zx7QUk6jB5AzORA8BNwAyJumFi8A224Ev0nf9W8NDmxUgK2fPkvcEaiTpQoBsEljlMD0nUC9vxqV3avRpbCkwuudHpwxf89/gORLpCVZejpwG7gNMdw5ZK1Oeq8KeIKq7GAJ7GF/zgsQgeqrkcvQxfzzAqUWd22w8rVVSA50wf8p7hmFHF9wHnOLRPSNSRFLKi88Ve4KeiDyg6oYolkKxS8h6i2Z8g5F959JJvne+SqKNdcfAoqqiA3diqQCi+93+H/B5xuCtetaCKBGzAtwyORskbLPdNbztU1QfsBs52DhsmD/ztClxqSVUfSS0hP0OcYtB+SF7qQxX5UkglFQDjX4y8WyDZA9wjUd+sygcLVXWCSNTtQLPvdXYBl5BveY9p8FBhBYyRQrYVWAR8AqyWqC9VPaeHqp4BE7kKWDB2OlRTU1NTU1NT81/hbx6WOVi9QQlkAAAAAElFTkSuQmCC">
+                    <h3>La Liga</h4>
+                </div>
+                <br><br>
+            </td>
+            <table class="league-table">
+                <thead>
+                    <tr>
+                        <th>#</th> <!-- New column for position number -->
+                        <th>Team</th>
+                        <th>G</th>
+                        <th>W</th>
+                        <th>D</th>
+                        <th>L</th>
+                        <th>GF</th>
+                        <th>GA</th>
+                        <th>GD</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in la_liga_table %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" class="team-logo">
+                                <a href="{% url 'team_detail' team.id %}">{{ team.name }}</a>
+                            </td>
+                            <td>{{ team.games }}</td>
+                            <td>{{ team.wins }}</td>
+                            <td>{{ team.draws }}</td>
+                            <td>{{ team.losses }}</td>
+                            <td>{{ team.goals_for }}</td>
+                            <td>{{ team.goals_against }}</td>
+                            <td>{{ team.goal_diff }}</td>
+                            <td>{{ team.points }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Matchweeks -->
+        <section class="matchweek-section">
+            <h2 class="section-title">La Liga Fixtures by Matchweek</h2>
+            
+            <!-- Loop through each matchweek and its matches -->
+            {% for matchweek, matches in fixtures_by_matchweek.items %}
+                <div class="matchweek">
+                    <h3>Matchweek {{ matchweek }}</h3>
+                    <table class="fixtures-table">
+                        <thead>
+                            <tr>
+                                <th>Home Team</th>
+                                <th>Score</th>
+                                <th>Away Team</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for match in matches %}
+                                <tr>
+                                    <!-- Home Team -->
+                                    <td>
+                                        <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                                        {{ match.home_team.name }}
+                                    </td>
+                                    
+                                    <!-- Score or "vs" if the match hasn't been played -->
+                                    <td>
+                                        {% if match.home_score is not None and match.away_score is not None %}
+                                            {{ match.home_score }} - {{ match.away_score }}
+                                        {% else %}
+                                            vs
+                                        {% endif %}
+                                    </td>
+        
+                                    <!-- Away Team -->
+                                    <td>
+                                        <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                                        {{ match.away_team.name }}
+                                    </td>
+        
+                                    <!-- Date and Time -->
+                                    <td>{{ match.date|date:"Y-m-d" }}</td>
+                                    <td>{{ match.date|time:"H:i" }}</td>
+                                    <td>
+                                        <form method="POST" action="{% if user.is_authenticated %}{% url 'mark_favourite' match.id %}{% else %}{% url 'login' %}?next={{ request.path }}{% endif %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="favorite-button">
+                                                {% if match.id in user_favourites %}
+                                                    ★ Favorite
+                                                {% else %}
+                                                    ☆ Mark as Favourite
+                                                {% endif %}
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </section>
+        
+        <footer>
+            <p>&copy; 2024 La Liga Stats. All rights reserved.</p>
+        </footer>

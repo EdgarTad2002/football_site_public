@@ -1,0 +1,307 @@
+/* Global Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.match {
+    font-size: 20px; /* Slightly smaller for better balance */
+    line-height: 1.6; /* Improved readability */
+    font-weight: bold; /* Make it bold for clearer visibility */
+}
+
+.team-logo {
+    width: 24px;  /* Slightly larger for clearer visuals */
+    height: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+    object-fit: contain;
+}
+
+
+.site-logo {
+    width: 80px;
+    height: 80px;
+    margin-right: 8px;
+    vertical-align: middle;
+    object-fit: contain;
+    border-radius: 50%;  /* This makes the image circular */
+    border: 2px solid transparent;  /* Optional: Add a border if needed */
+}
+
+
+/* Navigation Bar */
+.navbar {
+    background-color: #0d44c5;
+    color: white; /* Changed color to white for better contrast */
+    padding: 15px;
+    text-align: center;
+}
+
+.navbar h1 {
+    display: inline-block;
+    font-size: 26px;
+    margin: 0;
+    font-weight: bold; /* Highlight the site title */
+}
+
+.navbar nav {
+    display: inline-block;
+    float: none;
+}
+
+.navbar ul {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    display: inline;
+    padding: 0 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px; /* Increased font size */
+}
+
+.navbar ul li a:hover {
+    text-decoration: underline;
+    font-weight: bold; /* Added bold on hover */
+}
+
+/* Hero Section */
+.hero {
+    background-color: #a12828;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 38px; /* Increased size for emphasis */
+    margin-bottom: 15px;
+    text-transform: uppercase; /* All caps for more impact */
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* League Panels */
+.league-panels {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 10px; /* Added more margin for spacing */
+    flex-wrap: wrap; /* Panels stack vertically on smaller screens */
+}
+
+.panel {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 20px 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Deeper shadow for modern look */
+    flex: 1; /* Ensures panels resize on small screens */
+    max-width: 45%; /* Panels won't get too large on large screens */
+}
+
+.panel h3 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd; /* Added bottom border */
+    padding-bottom: 10px;
+}
+
+.panel-content .section {
+    margin-bottom: 30px; /* Increased spacing between sections */
+}
+
+.section h4 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.section ul {
+    list-style: none;
+}
+
+.section ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd; /* Divider between list items */
+}
+
+.section ul li:last-child {
+    border-bottom: none;
+}
+
+/* Table Styling */
+.section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px; /* More space above table */
+    background-color: #f9f9f9; /* Light background for tables */
+}
+
+.section table, th, td {
+    border: 1px solid #ddd;
+}
+
+.section th, td {
+    padding: 12px; /* Increased padding for better readability */
+    text-align: center;
+}
+
+.section th {
+    background-color: #2980b9;
+    color: white; /* White text for contrast */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.section td {
+    font-size: 16px;
+}
+
+/* Table Row Hover Effect */
+.section tbody tr:hover {
+    background-color: #f1f1f1; /* Light hover effect */
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .league-panels {
+        flex-direction: column; /* Stack panels vertically */
+    }
+
+    .panel {
+        max-width: 100%;
+    }
+
+    .navbar ul li a {
+        font-size: 16px; /* Reduced font size on smaller screens */
+    }
+
+    .hero h2 {
+        font-size: 30px; /* Adjust hero size for smaller screens */
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .team-logo {
+        width: 20px; /* Adjust logo size for smaller screens */
+        height: 20px;
+    }
+}
+
+.section tbody tr:nth-child(even) {
+    background-color: #ececec;
+}
+
+.section tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.section tbody th:first-child, .section tbody td:first-child {
+    border-left: none;
+}
+
+.section th {
+    background-color: #3498db; /* Adjust background color to match image */
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    padding: 10px; /* Reduce padding for a more compact look */
+}
+
+.section td {
+    font-size: 14px; /* Reduce font size to match image */
+    padding: 8px; /* Reduce padding for a more compact look */
+}
+
+.team-column {
+    width: 300px; /* Adjust the width as necessary */
+    text-align: center; /* Align text to the left */
+}
+
+.team-info {
+    display: flex;
+    align-items: center;  /* Aligns the logo and text vertically */
+}
+
+.team-info img {
+    width: 50px;  /* Adjust logo size to match the text */
+    height: auto;  /* Maintain aspect ratio of the logo */
+    margin-right: 10px;  /* Adds space between the logo and the text */
+}
+
+.team-info h3 {
+    font-size: 32px;  /* Adjust the text size as needed */
+    margin: 0;  /* Remove any default margin on the text */
+}
+
+h4 {
+    font-family: 'Roboto', sans-serif; /* Use a modern, clean font */
+    font-size: 28px;
+    color: #004d98; 
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+thead th {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: white;
+    background-color: #0078d7; /* Use soft blue for table header */
+    text-transform: uppercase;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+.login-link a {
+    color: #007bff; /* Change this to your desired color */
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 100px;
+}
+
+.login-link a:hover {
+    text-decoration: underline; /* Underline on hover for better visibility */
+}
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier League</title>
+    <link rel="stylesheet" href="{% static 'results/pl_styles.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'la_liga' %}">La Liga</a></li>
+            <li><a href="{% url 'favourite_games' %}">Favourite Games</a></li>
+
+            {% if user.is_authenticated %}
+                <li>Welcome, {{ user.username }}!</li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+                    
+                {% endif %}
+            
+        </ul>
+    </div>
+
+    <div class="container">
+        <!-- Premier League Table -->
+        <section class="league-table-section">
+            <td>
+                <div class="team-info">
+                    <img src="https://www.premierleague.com/resources/rebrand/v7.152.3/i/elements/pl-main-logo.png">
+                    <h3>Premier League</h4>
+                </div>
+                <br><br>
+            </td>
+            <table class="league-table">
+                <thead>
+                    <tr>
+                        <th>#</th> <!-- New column for position number -->
+                        <th>Team</th>
+                        <th>G</th>
+                        <th>W</th>
+                        <th>D</th>
+                        <th>L</th>
+                        <th>GF</th>
+                        <th>GA</th>
+                        <th>GD</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in premier_league_table %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" class="team-logo">
+                                <a href="{% url 'team_detail' team.id %}">{{ team.name }}</a>
+                            </td>
+                            <td>{{ team.games }}</td>
+                            <td>{{ team.wins }}</td>
+                            <td>{{ team.draws }}</td>
+                            <td>{{ team.losses }}</td>
+                            <td>{{ team.goals_for }}</td>
+                            <td>{{ team.goals_against }}</td>
+                            <td>{{ team.goal_diff }}</td>
+                            <td>{{ team.points }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Matchweeks -->
+        <section class="matchweek-section">
+            <h2 class="section-title">Premier League Fixtures by Matchweek</h2>
+            
+            <!-- Loop through each matchweek and its matches -->
+            {% for matchweek, matches in fixtures_by_matchweek.items %}
+                <div class="matchweek">
+                    <h3>Matchweek {{ matchweek }}</h3>
+                    <table class="fixtures-table">
+                        <thead>
+                            <tr>
+                                <th>Home Team</th>
+                                <th>Score</th>
+                                <th>Away Team</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for match in matches %}
+                                <tr>
+                                    <!-- Home Team -->
+                                    <td>
+                                        <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                                        {{ match.home_team.name }}
+                                    </td>
+                                    
+                                    <!-- Score or "vs" if the match hasn't been played -->
+                                    <td>
+                                        {% if match.home_score is not None and match.away_score is not None %}
+                                            {{ match.home_score }} - {{ match.away_score }}
+                                        {% else %}
+                                            vs
+                                        {% endif %}
+                                    </td>
+        
+                                    <!-- Away Team -->
+                                    <td>
+                                        <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                                        {{ match.away_team.name }}
+                                    </td>
+        
+                                    <!-- Date and Time -->
+                                    <td>{{ match.date|date:"Y-m-d" }}</td>
+                                    <td>{{ match.date|time:"H:i" }}</td>
+                                    <td>
+                                        <form method="POST" action="{% if user.is_authenticated %}{% url 'mark_favourite' match.id %}{% else %}{% url 'login' %}?next={{ request.path }}{% endif %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="favorite-button">
+                                                {% if match.id in user_favourites %}
+                                                    ★ Favorite
+                                                {% else %}
+                                                    ☆ Mark as Favourite
+                                                {% endif %}
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </section>
+        
+        <footer>
+            <p>&copy; 2024 Premier League Stats. All rights reserved.</p>
+        </footer>

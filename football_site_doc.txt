@@ -1,0 +1,40 @@
+About project
+
+This Django project is a football site that gathers data from the website fbref.com using web scraping techniques. The site provides users with information on the top 5 football leagues (Premier League, La Liga, Serie A, Bundesliga, and Ligue 1) and the UEFA Champions League. The displayed data includes league tables, match results, fixtures, and team information.
+
+
+Data is collected in the background using custom scraping scripts and also using celery to do scrapping periodically without any intervention.
+The project stores scraped data in a local database using two main models: Teams and Matches
+
+Teams model
+Fields:
+ - name
+ - games
+ - wins
+ - draws
+ - losses
+ - goals_for
+ - goals_against
+ - goals_diff
+ - points
+
+Match model
+ - home_team  ForeignKey (linked to Teams)
+ - away_team  ForeignKey (linked to Teams)
+ - date
+ - home_score
+ - away_score
+
+
+Technologies Used:
+
+ - Django 
+ - BeautifulSoup & Requests: Python libraries used for scraping football data from fbref.com.
+ - SQLite
+ - HTML/CSS
+
+
+Future improvments:
+
+ - Implement user authentication so that users can customize their views (favorite teams, leagues).
+ - Use Celery to automate data updates at scheduled intervals.

@@ -1,0 +1,127 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #0d44c5;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    padding: 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.league-table, .fixtures-table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.league-table th, .league-table td,
+.fixtures-table th, .fixtures-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.league-table th {
+    background-color: #06064d;
+    color: white;
+}
+
+.fixtures-table th {
+    background-color: #3e1103;
+    color: white;
+}
+
+.league-table td {
+    text-align: left;  /* Ensure the text is aligned to the left */
+    color:#ba3458;
+}
+
+.league-table td img {
+    width: 20px;      /* Adjust the logo size to match the table */
+    height: 20px;
+    margin-right: 8px;  /* Adds space between the logo and the text */
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.matchweek {
+    margin-bottom: 20px;
+}
+
+.matchweek h3 {
+    background-color: #2196f3;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.team-logo {
+    width: 20px; /* Adjust logo size for smaller screens */
+    height: 20px;
+}
+
+.team-info {
+    display: flex;
+    align-items: center;  /* Aligns the logo and text vertically */
+}
+
+.team-info img {
+    width: 50px;  /* Adjust logo size to match the text */
+    height: auto;  /* Maintain aspect ratio of the logo */
+    margin-right: 10px;  /* Adds space between the logo and the text */
+}
+
+.team-info h3 {
+    font-size: 32px;  /* Adjust the text size as needed */
+    margin: 0;  /* Remove any default margin on the text */
+}
+
+.favorite-button {
+    background-color: transparent;
+    border: none;
+    color: #ffcc00; /* Gold star color */
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.favorite-button:hover {
+    color: #ffa500; /* Darker gold */
+}
