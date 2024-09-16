@@ -122,3 +122,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+CELERY_BEAT_SCHEDULE = {
+    'laliga_update': {
+        'task': 'football_site.update_files.fetch_laliga.laliga_update',  # Replace with your app and module
+        'schedule': 7200,  # Run every hour (adjust as needed)
+    },
+    'pl_update': {
+        'task': 'football_site.update_files.fetch_pl.pl_updata',
+        'schedule': 7200,
+    },
+}
+
+CELERY_TIMEZONE = 'UTC'

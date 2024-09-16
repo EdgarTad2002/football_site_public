@@ -1,0 +1,142 @@
+/usr/bin/celery:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import load_entry_point
+/usr/bin/celery:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import load_entry_point
+/home/edgar/football_site
+celery beat v5.3.6 (emerald-rush) is starting.
+__    -    ... __   -        _
+LocalTime -> 2024-09-15 18:42:35
+Configuration ->
+    . broker -> redis://localhost:6379//
+    . loader -> celery.loaders.app.AppLoader
+    . scheduler -> celery.beat.PersistentScheduler
+    . db -> celerybeat-schedule
+    . logfile -> [stderr]@%INFO
+    . maxinterval -> 5.00 minutes (300s)
+[2024-09-15 18:42:35,511: INFO/MainProcess] beat: Starting...
+/home/edgar/football_site
+ 
+ -------------- celery@edgar-ubuntu v5.3.6 (emerald-rush)
+--- ***** ----- 
+-- ******* ---- Linux-6.8.0-41-generic-x86_64-with-glibc2.39 2024-09-15 18:42:35
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         football_site:0x7571330789b0
+- ** ---------- .> transport:   redis://localhost:6379//
+- ** ---------- .> results:     redis://localhost:6379/
+- *** --- * --- .> concurrency: 16 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . football_site.celery.debug_task
+
+[2024-09-15 18:42:37,041: WARNING/MainProcess] /usr/lib/python3/dist-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-09-15 18:42:37,057: INFO/MainProcess] Connected to redis://localhost:6379//
+[2024-09-15 18:42:37,059: WARNING/MainProcess] /usr/lib/python3/dist-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-09-15 18:42:37,061: INFO/MainProcess] mingle: searching for neighbors
+[2024-09-15 18:42:38,073: INFO/MainProcess] mingle: all alone
+[2024-09-15 18:42:38,085: INFO/MainProcess] celery@edgar-ubuntu ready.
+/usr/bin/celery:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import load_entry_point
+/home/edgar/football_site
+ 
+ -------------- celery@edgar-ubuntu v5.3.6 (emerald-rush)
+--- ***** ----- 
+-- ******* ---- Linux-6.8.0-41-generic-x86_64-with-glibc2.39 2024-09-15 18:43:30
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         football_site:0x7d880056c4a0
+- ** ---------- .> transport:   redis://localhost:6379//
+- ** ---------- .> results:     redis://localhost:6379/
+- *** --- * --- .> concurrency: 16 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . football_site.celery.debug_task
+
+[2024-09-15 18:43:32,065: WARNING/MainProcess] /usr/lib/python3/dist-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-09-15 18:43:32,080: INFO/MainProcess] Connected to redis://localhost:6379//
+[2024-09-15 18:43:32,082: WARNING/MainProcess] /usr/lib/python3/dist-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-09-15 18:43:32,084: INFO/MainProcess] mingle: searching for neighbors
+[2024-09-15 18:43:33,105: WARNING/MainProcess] /usr/lib/python3/dist-packages/celery/app/control.py:56: DuplicateNodenameWarning: Received multiple replies from node name: celery@edgar-ubuntu.
+Please make sure you give each node a unique nodename using
+the celery worker `-n` option.
+  warnings.warn(DuplicateNodenameWarning(
+
+[2024-09-15 18:43:33,106: INFO/MainProcess] mingle: all alone
+[2024-09-15 18:43:33,117: INFO/MainProcess] celery@edgar-ubuntu ready.
+
+Restarting celery worker (/usr/bin/celery -A football_site worker -l info)
+/usr/bin/celery:22: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import load_entry_point
+/home/edgar/football_site
+ 
+ -------------- celery@edgar-ubuntu v5.3.6 (emerald-rush)
+--- ***** ----- 
+-- ******* ---- Linux-6.8.0-41-generic-x86_64-with-glibc2.39 2024-09-15 18:44:17
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         football_site:0x7fc487b6c3b0
+- ** ---------- .> transport:   redis://localhost:6379//
+- ** ---------- .> results:     redis://localhost:6379/
+- *** --- * --- .> concurrency: 16 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . football_site.celery.debug_task
+
+[2024-09-15 18:44:18,601: WARNING/MainProcess] /usr/lib/python3/dist-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-09-15 18:44:18,613: INFO/MainProcess] Connected to redis://localhost:6379//
+[2024-09-15 18:44:18,615: WARNING/MainProcess] /usr/lib/python3/dist-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-09-15 18:44:18,617: INFO/MainProcess] mingle: searching for neighbors
+[2024-09-15 18:44:19,630: WARNING/MainProcess] /usr/lib/python3/dist-packages/celery/app/control.py:56: DuplicateNodenameWarning: Received multiple replies from node name: celery@edgar-ubuntu.
+Please make sure you give each node a unique nodename using
+the celery worker `-n` option.
+  warnings.warn(DuplicateNodenameWarning(
+
+[2024-09-15 18:44:19,630: INFO/MainProcess] mingle: all alone
+[2024-09-15 18:44:19,643: INFO/MainProcess] celery@edgar-ubuntu ready.
+[2024-09-15 18:47:07,916: INFO/MainProcess] sync with worker1@edgar-ubuntu
+[2024-09-15 18:47:07,916: INFO/MainProcess] sync with worker1@edgar-ubuntu
