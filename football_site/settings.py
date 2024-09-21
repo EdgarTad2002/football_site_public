@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'football_site.results',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -123,5 +124,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+CRONJOBS = [
+    ('0 */2 * * *', 'football_site.update_files.fetch_laliga.la_liga_update'),
+    ('0 */2 * * *', 'football_site.update_files.fetch_pl.pl_update'),
+    # Add more cron jobs as needed
+]
 
