@@ -1,12 +1,12 @@
+
 import requests
 from bs4 import BeautifulSoup
-from ..results.teams import Team
-from ..results.matches import Match 
+from football_site.results.teams import Team
+from football_site.results.matches import Match 
 from django.http import HttpResponse
-from celery import shared_task
 
-@shared_task
-def laliga_update():
+
+def la_liga_update():
     standings_url = 'https://fbref.com/en/comps/12/La-Liga-Stats'
     data = requests.get(standings_url)
     soup = BeautifulSoup(data.text, 'html.parser')

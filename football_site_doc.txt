@@ -32,7 +32,7 @@ Technologies Used:
  - BeautifulSoup & Requests: Python libraries used for scraping football data from fbref.com.
  - SQLite
  - HTML/CSS
- - Celery (optional)
+
 
 Future improvments:
 

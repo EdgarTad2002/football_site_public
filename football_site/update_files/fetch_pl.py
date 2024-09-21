@@ -3,10 +3,10 @@ from bs4 import BeautifulSoup
 from ..results.teams import Team
 from ..results.matches import Match 
 from django.http import HttpResponse
-from celery import shared_task
 
 
-@shared_task
+
+
 def pl_update():
     standings_url = 'https://fbref.com/en/comps/9/Premier-League-Stats'
     data = requests.get(standings_url)

@@ -14,4 +14,7 @@ class MatchAdmin(admin.ModelAdmin):
     list_display = ('home_team', 'away_team', 'date', 'home_score', 'away_score')
     list_filter = ('date', 'home_team', 'away_team')
     search_fields = ('home_team__name', 'away_team__name')
-    ordering = ('-date',)    
+    ordering = ('-date',)
+
+
+    
