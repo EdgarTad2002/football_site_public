@@ -8,6 +8,7 @@ class Match(models.Model):
     date = models.DateTimeField()
     home_score = models.IntegerField(null=True, blank=True)
     away_score = models.IntegerField(null=True, blank=True)
+    matchday = models.IntegerField(null=True)
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):
