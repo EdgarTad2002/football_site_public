@@ -1,12 +1,24 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
+from django.db import connection
 
 from football_site.results.matches import Match
 from football_site.results.teams import Team
+from football_site.results.dataload import InitialDataLoad
 
 
 def pl_fixtrues():
+
+    if 'results_initialdataload' not in connection.introspection.table_names():
+        print("InitialDataLoad table does not exist yet. Skipping fixtures loading.")
+        return
+
+    # Check if the data has already been loaded
+    if InitialDataLoad.objects.filter(name='premier_league_fixtures', is_loaded=True).exists():
+        print("Premier League fixtures have already been loaded.")
+        return 
+
     standings_url = 'https://fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures'
 
     
@@ -67,3 +79,8 @@ def pl_fixtrues():
         )
 
         match.save()
+
+        InitialDataLoad.objects.update_or_create(
+            name = 'premier_league_fixtures',
+            defaults={'is_loaded': True}
+        )
