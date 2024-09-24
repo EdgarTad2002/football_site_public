@@ -127,6 +127,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRONJOBS = [
     ('0 */2 * * *', 'football_site.update_files.fetch_laliga.la_liga_update'),
     ('0 */2 * * *', 'football_site.update_files.fetch_pl.pl_update'),
+    ('0 0 * * *', 'football_site.update_files.pl_fixtures_update.update_pl_fixtures'),
     # Add more cron jobs as needed
 ]
 
