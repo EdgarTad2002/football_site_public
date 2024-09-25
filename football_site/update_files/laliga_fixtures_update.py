@@ -1,27 +1,13 @@
-import requests
+from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
-from datetime import datetime
-from django.db import connection
+import requests
 
+from football_site.results.teams import Team 
 from football_site.results.matches import Match
-from football_site.results.teams import Team
-from football_site.results.dataload import InitialDataLoad
 
+def update_laliga_fixtures():
+    standings_url = 'https://fbref.com/en/comps/12/schedule/La-Liga-Scores-and-Fixtures'
 
-def pl_fixtures():
-
-    if 'results_initialdataload' not in connection.introspection.table_names():
-        print("InitialDataLoad table does not exist yet. Skipping fixtures loading.")
-        return
-
-    # Check if the data has already been loaded
-    if InitialDataLoad.objects.filter(name='premier_league_fixtures', is_loaded=True).exists():
-        print("Premier League fixtures have already been loaded.")
-        return 
-
-    standings_url = 'https://fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures'
-
-    
     try:
         data = requests.get(standings_url)
         # data.raise_for_status()  # Raises an error for bad responses
@@ -32,7 +18,7 @@ def pl_fixtures():
     soup = BeautifulSoup(data.text, 'html.parser')
 
     # Find the table that contains team standings
-    standings_table = soup.find('table', {'id': 'sched_2024-2025_9_1'})
+    standings_table = soup.find('table', {'id': 'sched_2024-2025_12_1'})
     if not standings_table:
         print("Could not find standings table")
         return
@@ -40,7 +26,10 @@ def pl_fixtures():
     # Get all the rows of the standings table, skipping the header
     res = standings_table.find('tbody')
     rows = res.find_all('tr')
-    
+
+    today = datetime.now()
+    previous_day = today - timedelta(days=1)
+    next_day = today + timedelta(days=1)
 
     for row in rows:
         # Skip rows that have the 'spacer' class or that don't have a valid gameweek (match day) value
@@ -51,6 +40,9 @@ def pl_fixtures():
         match_time = row.find('td', {'data-stat': 'start_time'})
         datetime_str = f"{match_date.text} {match_time.text}".strip()
         match_datetime = datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
+
+        if not (previous_day <= match_datetime <= next_day):
+            continue
 
         home_team = row.find('td', {'data-stat': 'home_team'}).text.strip()
         away_team = row.find('td', {'data-stat': 'away_team'}).text.strip()
@@ -79,8 +71,3 @@ def pl_fixtures():
         )
 
         match.save()
-
-        InitialDataLoad.objects.update_or_create(
-            name = 'premier_league_fixtures',
-            defaults={'is_loaded': True}
-        )

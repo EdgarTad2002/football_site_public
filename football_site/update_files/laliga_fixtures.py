@@ -8,18 +8,18 @@ from football_site.results.teams import Team
 from football_site.results.dataload import InitialDataLoad
 
 
-def pl_fixtures():
+def laliga_fixtures():
 
     if 'results_initialdataload' not in connection.introspection.table_names():
         print("InitialDataLoad table does not exist yet. Skipping fixtures loading.")
         return
 
     # Check if the data has already been loaded
-    if InitialDataLoad.objects.filter(name='premier_league_fixtures', is_loaded=True).exists():
-        print("Premier League fixtures have already been loaded.")
+    if InitialDataLoad.objects.filter(name='la_liga_fixtures', is_loaded=True).exists():
+        print("La Liga fixtures have already been loaded.")
         return 
 
-    standings_url = 'https://fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures'
+    standings_url = 'https://fbref.com/en/comps/12/schedule/La-Liga-Scores-and-Fixtures'
 
     
     try:
@@ -32,16 +32,16 @@ def pl_fixtures():
     soup = BeautifulSoup(data.text, 'html.parser')
 
     # Find the table that contains team standings
-    standings_table = soup.find('table', {'id': 'sched_2024-2025_9_1'})
+    standings_table = soup.find('table', {'id': 'sched_2024-2025_12_1'})
     if not standings_table:
         print("Could not find standings table")
         return
 
     # Get all the rows of the standings table, skipping the header
     res = standings_table.find('tbody')
+
     rows = res.find_all('tr')
     
-
     for row in rows:
         # Skip rows that have the 'spacer' class or that don't have a valid gameweek (match day) value
         if 'spacer' in row.get('class', []) or 'thead' in row.get('class', []):
@@ -81,6 +81,6 @@ def pl_fixtures():
         match.save()
 
         InitialDataLoad.objects.update_or_create(
-            name = 'premier_league_fixtures',
+            name = 'la_liga_fixtures',
             defaults={'is_loaded': True}
         )
