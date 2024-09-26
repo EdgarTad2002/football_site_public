@@ -28,8 +28,8 @@ def update_laliga_fixtures():
     rows = res.find_all('tr')
 
     today = datetime.now()
-    previous_day = today - timedelta(days=1)
-    next_day = today + timedelta(days=1)
+    previous_day = today - timedelta(days=3)
+    next_day = today + timedelta(days=3)
 
     for row in rows:
         # Skip rows that have the 'spacer' class or that don't have a valid gameweek (match day) value

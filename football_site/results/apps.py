@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.utils import timezone
 
 
 class ResultsConfig(AppConfig):
@@ -10,5 +11,6 @@ class ResultsConfig(AppConfig):
         from ..update_files.laliga_fixtures import laliga_fixtures
         pl_fixtures()
         laliga_fixtures()
+        print(timezone.now())
 
         
