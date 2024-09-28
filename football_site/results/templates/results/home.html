@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeagueScore</title>
+    <link rel="stylesheet" href="{% static 'results/style.css' %}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="navbar">
+            <h1>LeagueScore</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Premier League</a></li>
+                    <li><a href="#">La Liga</a></li>
+                    <li><a href="#">Fixtures</a></li>
+                    <li><a href="#">Results</a></li>
+                    <li><a href="#">Tables</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Welcome to Football Hub</h2>
+        <p>Get the latest results, fixtures, and tables for Premier League and La Liga</p>
+    </section>
+
+    <!-- League Panels -->
+    <section class="league-panels">
+        <!-- Premier League Panel -->
+        <div class="panel">
+            <h3>Premier League</h3>
+            <div class="panel-content">
+                <!-- Latest Results -->
+                <div class="section">
+                    <h4>Latest Results</h4>
+                    <ul>
+                        <li>Manchester United 2-1 Arsenal</li>
+                        <li>Chelsea 0-0 Liverpool</li>
+                        <li>Tottenham 3-1 Everton</li>
+                    </ul>
+                </div>
+                <!-- Fixtures -->
+                <div class="section">
+                    <h4>Upcoming Fixtures</h4>
+                    <ul>
+                        <li>Manchester City vs Tottenham</li>
+                        <li>Leicester City vs West Ham</li>
+                        <li>Aston Villa vs Leeds</li>
+                    </ul>
+                </div>
+                <!-- Mini Table -->
+                <div class="section">
+                    <h4>League Table</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Manchester City</td><td>85</td></tr>
+                            <tr><td>Liverpool</td><td>83</td></tr>
+                            <tr><td>Chelsea</td><td>78</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- La Liga Panel -->
+        <div class="panel">
+            <h3>La Liga</h3>
+            <div class="panel-content">
+                <!-- Latest Results -->
+                <div class="section">
+                    <h4>Latest Results</h4>
+                    <ul>
+                        <li>Real Madrid 2-0 Barcelona</li>
+                        <li>Atletico Madrid 1-1 Sevilla</li>
+                        <li>Villarreal 4-2 Real Sociedad</li>
+                    </ul>
+                </div>
+                <!-- Fixtures -->
+                <div class="section">
+                    <h4>Upcoming Fixtures</h4>
+                    <ul>
+                        <li>Real Betis vs Getafe</li>
+                        <li>Granada vs Valencia</li>
+                        <li>Celta Vigo vs Mallorca</li>
+                    </ul>
+                </div>
+                <!-- Mini Table -->
+                <div class="section">
+                    <h4>League Table</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Real Madrid</td><td>90</td></tr>
+                            <tr><td>Barcelona</td><td>85</td></tr>
+                            <tr><td>Atletico Madrid</td><td>82</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Football Hub. All rights reserved.</p>
+    </footer>
+</body>
+</html>

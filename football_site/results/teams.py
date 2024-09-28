@@ -13,6 +13,8 @@ class Team(models.Model):
     goals_against = models.IntegerField(null=True)
     goal_diff = models.IntegerField(null=True)
     points = models.IntegerField(null=True)
+    league = models.CharField(max_length=50, null=True)
+    
 
     def __str__(self):
         return self.name 

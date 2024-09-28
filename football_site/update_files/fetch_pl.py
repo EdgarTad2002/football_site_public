@@ -39,7 +39,7 @@ def pl_update():
         team.goals_against = goals_against
         team.goal_diff = goal_diff
         team.points = points
-        
+        team.league = "Premier League"
 
         team.save()
         
