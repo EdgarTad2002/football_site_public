@@ -1,3 +1,21 @@
+from itertools import groupby
+from django.shortcuts import render
+from ..results.teams import Team
+from ..results.matches import Match
 
-def show_table(request):
-    pass    
+
+def premier_league(request):
+
+    premier_league_table = Team.objects.filter(league="Premier League").order_by('-points', '-goal_diff', '-goals_for')
+    premier_league_fixtures = Match.objects.filter(home_team__league="Premier League").order_by('matchday', 'date')
+
+    fixtures_by_matchweek = {}
+    for matchday, matches in groupby(premier_league_fixtures, key=lambda x: x.matchday):
+        fixtures_by_matchweek[matchday] = list(matches)
+
+    context = {
+        'premier_league_table': premier_league_table,
+        'fixtures_by_matchweek': fixtures_by_matchweek,
+    }
+
+    return render(request, 'results/premier_league.html', context) 
