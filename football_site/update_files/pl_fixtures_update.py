@@ -28,8 +28,8 @@ def update_pl_fixtures():
     rows = res.find_all('tr')
 
     today = datetime.now()
-    previous_day = today - timedelta(days=1)
-    next_day = today + timedelta(days=1)
+    previous_day = today - timedelta(days=2)
+    next_day = today + timedelta(days=2)
 
     for row in rows:
         # Skip rows that have the 'spacer' class or that don't have a valid gameweek (match day) value

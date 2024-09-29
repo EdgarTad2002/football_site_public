@@ -11,6 +11,7 @@
     <!-- Navigation Bar -->
     <header>
         <div class="navbar">
+            <img src="https://i.imgur.com/V9VWRcu.jpeg" alt="{{ match.home_team.name }} logo" class="site-logo">
             <h1>LeagueScore</h1>
             <nav>
                 <ul>
@@ -35,7 +36,13 @@
     <section class="league-panels">
         <!-- Premier League Panel -->
         <div class="panel">
-            <h3>Premier League</h3>
+            <td>
+                <div class="team-info">
+                    <img src="https://www.premierleague.com/resources/rebrand/v7.152.3/i/elements/pl-main-logo.png">
+                    <h3>Premier League</h4>
+                </div>
+            </td>
+            
             <div class="panel-content">
                 <!-- Latest Results -->
                 <div class="section">
@@ -86,7 +93,11 @@
                         <tbody>
                             {% for team in premier_league_table %}
                                 <tr>
-                                    <td>{{ team.name }}</td>
+                                    <td class="team-column">
+                                        <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" class="team-logo">
+                                        <br>
+                                        {{ team.name }}
+                                    </td>
                                     <td>{{ team.games }}</td>
                                     <td>{{ team.wins }}</td>
                                     <td>{{ team.draws }}</td>
@@ -99,12 +110,18 @@
                         </tbody>
                     </table>
                 </div>
+                
             </div>
         </div>
 
         <!-- La Liga Panel -->
         <div class="panel">
-            <h3>La Liga</h3>
+            <td>
+                <div class="team-info">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAABHlJREFUeJztml2IVVUUx39rSBkyC5OCiEBfBNNeLAgTiejYg7umIpDKQfumjwchKkvCxMgKKgKfrCmZwqRvsDaVLQbLmkyFVJiipBgKIiow+tA+rN3DuTOMdu85a917TwadH9y3/157rXXXPmftvQ/U1NTU1NTU1NTU1NT8D5EqjKaQTQbmAz0G+SRgu0Q9VGCvBzgX6DW6MAnYJ1G/KRMeZzToZSWw1qjdAZxfolkCbHbM/wswDyhNQNcrIIVsLrAX278PMEWiHiywNx34DDjZ4cZiifqGRWh10sOQw25fUfANtuEL/lFr8NDlBKSQPQ6cYpQ/I1FfK7G3ApjrcGFUot7h0HcvASlkC4EVRvn+Mm0K2ZnAYw4XDgP9Dj3QpQSkkJ0AbHIM6ZeoPxTY6wGexeffOon6vkMPzgmKeBI4w6hdJVF3lmjWkz/FrQxJ1Psc+nE6TkAKWT9wpVE+IlEfLLEXgFsdLvwKXOvQH0FHCUghm0r+71s4BFxh0Hne9wDXSdQvnWPG6bQCBrF3Z/dK1E+LBClkm4CpjvmHJKo3YUfQdgJSyG4BLjfKX5CohU/0FLJrgKsdLnwNLHbom9JWAlLIZgMPGeXfAjeX2JsFPOJ04waJ+ptzzD9otwI2Aicatcsk6oESzQAw3TH/ek+3V4Q7ASlkK8l3ZhY2S9S3DPYWOlz4HLjdoS/EtRlqlP7HRvl+iTqri/bGOFWifucc0xJzBaSQHQ+8aJT/ASw32HvZOn+Du7sZPPiWwCpgjlG7RqJ+UKK5H5jtmP89ifqwQ2/CtARSyGYA+7C9o3dK1MJnRArZImCrZe4GPwNzOml4WmGtgAXYgv8LuKBIkEI2DftSGmN5FcGD/UhsmlG3ETirsb6bzXUQWA2cZLQHMCBRX3HoXVgT8KdRd33j14wvyM8BLjLaAvhRot7o0LuxLoGPOphjFOgj7x0873uwbZ46wpQAiboDeNVpew9wqUSd2Tj6eh1otjRasU6iqnNON57X4G2A5R28F7gYmCdRtwCkkK3F3j1CflRuPVbvCG8neB7Q6tjpK+AB4CmJenjCmPmNMda5fidP3ojHt3Zx7QUk6jB5AzORA8BNwAyJumFi8A224Ev0nf9W8NDmxUgK2fPkvcEaiTpQoBsEljlMD0nUC9vxqV3avRpbCkwuudHpwxf89/gORLpCVZejpwG7gNMdw5ZK1Oeq8KeIKq7GAJ7GF/zgsQgeqrkcvQxfzzAqUWd22w8rVVSA50wf8p7hmFHF9wHnOLRPSNSRFLKi88Ve4KeiDyg6oYolkKxS8h6i2Z8g5F959JJvne+SqKNdcfAoqqiA3diqQCi+93+H/B5xuCtetaCKBGzAtwyORskbLPdNbztU1QfsBs52DhsmD/ztClxqSVUfSS0hP0OcYtB+SF7qQxX5UkglFQDjX4y8WyDZA9wjUd+sygcLVXWCSNTtQLPvdXYBl5BveY9p8FBhBYyRQrYVWAR8AqyWqC9VPaeHqp4BE7kKWDB2OlRTU1NTU1NT81/hbx6WOVi9QQlkAAAAAElFTkSuQmCC">
+                    <h3>La Liga</h4>
+                </div>
+            </td>
             <div class="panel-content">
                 <!-- Latest Results -->
                 <div class="section">
@@ -155,7 +172,12 @@
                         <tbody>
                             {% for team in la_liga_table %}
                                 <tr>
-                                    <td>{{ team.name }}</td>
+                                    <td class="team-column">
+                                        <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" class="team-logo">
+                                        <br>
+                                        {{ team.name }}
+                                    </td>
+                                    
                                     <td>{{ team.games }}</td>
                                     <td>{{ team.wins }}</td>
                                     <td>{{ team.draws }}</td>
@@ -168,6 +190,7 @@
                         </tbody>
                     </table>
                 </div>
+                
             </div>
         </div>
     </section>
