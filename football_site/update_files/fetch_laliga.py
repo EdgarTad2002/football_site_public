@@ -29,6 +29,12 @@ def la_liga_update():
         goal_diff = row.find('td', {'data-stat': 'goal_diff'}).text.strip()
         points = row.find('td', {'data-stat': 'points'}).text.strip()
 
+        team_logo_td = row.find('td', {'data-stat': 'team'})
+        logo_img_tag = team_logo_td.find('img')
+        logo_url = logo_img_tag['src']
+
+
+
         team, created = Team.objects.get_or_create(name=team_name)
         team.games = games 
         team.wins = wins
@@ -39,6 +45,7 @@ def la_liga_update():
         team.goal_diff = goal_diff
         team.points = points
         team.league = "La Liga"
+        team.logo_url = logo_url
 
         team.save()
 

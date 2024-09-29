@@ -14,6 +14,7 @@ class Team(models.Model):
     goal_diff = models.IntegerField(null=True)
     points = models.IntegerField(null=True)
     league = models.CharField(max_length=50, null=True)
+    logo_url = models.URLField(max_length=500, null=True, blank=True)
     
 
     def __str__(self):

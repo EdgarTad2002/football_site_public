@@ -121,6 +121,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -133,4 +136,5 @@ CRONJOBS = [
     ('0 */4 * * *', 'football_site.update_files.laliga_fixtures_update.update_laliga_fixtures'),
     # Add more cron jobs as needed
 ]
+
 
