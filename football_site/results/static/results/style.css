@@ -15,6 +15,19 @@ ul {
     padding: 0;
 }
 
+.match {
+    font-size: 22px; /* Increase the font size to make it larger */
+    line-height: 1.5; /* Optional: Adjust line height for better readability */
+}
+
+.team-logo {
+    width: 20px;  /* Adjust logo size if desired, or leave it as is */
+    height: 20px; /* Adjust logo size if desired, or leave it as is */
+    margin-right: 5px; /* Space between logo and match info */
+    object-fit: contain; /* Keeps the logo's aspect ratio */
+}
+
+
 /* Navigation Bar */
 .navbar {
     background-color: #0d44c5;

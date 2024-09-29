@@ -42,9 +42,13 @@
                     <h4>Latest Results</h4>
                     <ul>
                         {% for match in premier_league_results %}
-                            <li>{{ match.home_team }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team }}</li>
-                        {% empty %}
-                            <li>No results available.</li>
+                        <li>
+                            <span class="match">
+                                <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                                {{ match.home_team.name }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team.name }}
+                                <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                            </span>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -53,9 +57,13 @@
                     <h4>Upcoming Fixtures</h4>
                     <ul>
                         {% for match in premier_league_fixtures %}
-                            <li>{{ match.home_team }} vs {{ match.away_team }}</li>
-                        {% empty %}
-                            <li>No results available.</li>
+                        <li>
+                            <span class="match">
+                                <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                                {{ match.home_team.name }}  vs {{ match.away_team.name }}
+                                <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                            </span>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -103,9 +111,13 @@
                     <h4>Latest Results</h4>
                     <ul>
                         {% for match in la_liga_results %}
-                            <li>{{ match.home_team }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team }}</li>
-                        {% empty %}
-                            <li>No results available.</li>
+                        <li>
+                        <span class="match">
+                            <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                            {{ match.home_team.name }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team.name }}
+                            <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                        </span>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -114,9 +126,13 @@
                     <h4>Upcoming Fixtures</h4>
                     <ul>
                         {% for match in la_liga_fixtures %}
-                            <li>{{ match.home_team }} vs {{ match.away_team }}</li>
-                        {% empty %}
-                            <li>No results available.</li>
+                        <li>
+                        <span class="match">
+                            <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
+                            {{ match.home_team.name }} vs {{ match.away_team.name }}
+                            <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
+                        </span>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
