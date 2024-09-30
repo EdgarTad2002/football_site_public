@@ -17,12 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .api import home_view, pl_views, laliga_views
+from .api import home_view, pl_views, laliga_views, teams
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view.home, name='home'),
     path('premier-league/', pl_views.premier_league, name='premier_league'),
     path('la-liga/', laliga_views.la_liga, name='la_liga'),
+    path('team/<int:team_id>/', teams.team_detail, name='team_detail'),
     #path('run/', pl.viewpl, name='viewpl')
 ]

@@ -130,10 +130,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRONJOBS = [
-    ('0 */4 * * *', 'football_site.update_files.fetch_laliga.la_liga_update'),
-    ('0 */4 * * *', 'football_site.update_files.fetch_pl.pl_update'),
-    ('0 */4 * * *', 'football_site.update_files.pl_fixtures_update.update_pl_fixtures'),
-    ('0 */4 * * *', 'football_site.update_files.laliga_fixtures_update.update_laliga_fixtures'),
+    ('0 */1 * * *', 'football_site.update_files.fetch_laliga.la_liga_update'),
+    ('0 */1 * * *', 'football_site.update_files.fetch_pl.pl_update'),
+    ('0 */1 * * *', 'football_site.update_files.pl_fixtures_update.update_pl_fixtures'),
+    ('0 */1 * * *', 'football_site.update_files.laliga_fixtures_update.update_laliga_fixtures'),
     # Add more cron jobs as needed
 ]
 
