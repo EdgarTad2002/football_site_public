@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views
 
-from .api import home_view, pl_views, laliga_views, teams
+from .api import home_view, pl_views, laliga_views, teams, add_favourite, login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +26,9 @@ urlpatterns = [
     path('premier-league/', pl_views.premier_league, name='premier_league'),
     path('la-liga/', laliga_views.la_liga, name='la_liga'),
     path('team/<int:team_id>/', teams.team_detail, name='team_detail'),
+    path('login/', login_view.CustomLoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('match/<int:match_id>/favourite', add_favourite.add_favourite_game, name='mark_favourite'),
+
     #path('run/', pl.viewpl, name='viewpl')
 ]

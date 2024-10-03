@@ -113,3 +113,15 @@ footer {
     font-size: 32px;  /* Adjust the text size as needed */
     margin: 0;  /* Remove any default margin on the text */
 }
+
+.favorite-button {
+    background-color: transparent;
+    border: none;
+    color: #ffcc00; /* Gold star color */
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.favorite-button:hover {
+    color: #ffa500; /* Darker gold */
+}

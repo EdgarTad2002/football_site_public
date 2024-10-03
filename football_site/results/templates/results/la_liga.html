@@ -108,6 +108,18 @@
                                     <!-- Date and Time -->
                                     <td>{{ match.date|date:"Y-m-d" }}</td>
                                     <td>{{ match.date|time:"H:i" }}</td>
+                                    <td>
+                                        <form method="POST" action="{% if user.is_authenticated %}{% url 'mark_favourite' match.id %}{% else %}{% url 'login' %}?next={{ request.path }}{% endif %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="favorite-button">
+                                                {% if match.id in user_favourites %}
+                                                    ★ Favorite
+                                                {% else %}
+                                                    ☆ Mark as Favourite
+                                                {% endif %}
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>

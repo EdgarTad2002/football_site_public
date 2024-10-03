@@ -293,3 +293,14 @@ thead th {
     letter-spacing: 1px;
     font-weight: 400;
 }
+
+.login-link a {
+    color: #007bff; /* Change this to your desired color */
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 100px;
+}
+
+.login-link a:hover {
+    text-decoration: underline; /* Underline on hover for better visibility */
+}

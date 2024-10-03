@@ -137,4 +137,4 @@ CRONJOBS = [
     # Add more cron jobs as needed
 ]
 
-
+LOGIN_REDIRECT_URL = '/'

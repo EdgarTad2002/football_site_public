@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from .teams import Team
+from django.contrib.auth.models import User
 
 class Match(models.Model):
     home_team = models.ForeignKey(Team, related_name='home_matches', on_delete=models.CASCADE)
@@ -9,6 +10,8 @@ class Match(models.Model):
     home_score = models.IntegerField(null=True, blank=True)
     away_score = models.IntegerField(null=True, blank=True)
     matchday = models.IntegerField(null=True)
+
+    
 
 @admin.register(Match)
 class MatchAdmin(admin.ModelAdmin):

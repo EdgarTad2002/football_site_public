@@ -2,6 +2,10 @@ from django.shortcuts import render
 from ..results.matches import Match
 from ..results.teams import Team
 
+
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
 def home(request):
     premier_league_results = Match.objects.filter(home_team__league='Premier League', home_score__isnull=False, away_score__isnull=False).order_by('-date')[:5]
     la_liga_results = Match.objects.filter(home_team__league='La Liga', home_score__isnull=False, away_score__isnull=False).order_by('-date')[:5]
@@ -21,4 +25,26 @@ def home(request):
         'la_liga_table': la_liga_table,
     }
     return render(request, 'results/home.html', context)
+
+
+def login_view(request):
+    from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)  # Correctly calling login() with both request and user
+            next_url = request.POST.get('next', '/')  # Use POST data for next
+            return redirect(next_url)
+        else:
+            # Handle invalid login
+            return render(request, 'login.html', {'error': 'Invalid username or password'})
+    return render(request, 'login.html')
+
+
 
