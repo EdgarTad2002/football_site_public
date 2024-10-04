@@ -7,34 +7,28 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Custom CSS for the login form */
         .modal-content {
             border-radius: 10px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
         }
-
         .modal-header {
             background-color: #0066cc;
             color: white;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
-
         .form-label {
             color: #0066cc;
             font-weight: bold;
         }
-
         .form-control {
             border-radius: 5px;
             border: 1px solid #0066cc;
         }
-
         .form-control:focus {
             border-color: #003366;
             box-shadow: 0 0 8px rgba(0, 102, 204, 0.5);
         }
-
         .login-btn {
             background-color: #0066cc;
             color: white;
@@ -42,21 +36,17 @@
             font-weight: bold;
             width: 100%;
         }
-
         .login-btn:hover {
             background-color: #004c99;
         }
-
         .modal-footer {
             display: flex;
             justify-content: space-between;
         }
-
         .modal-footer a {
             text-decoration: none;
             color: #0066cc;
         }
-
         .modal-footer a:hover {
             text-decoration: underline;
         }
@@ -73,11 +63,20 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <!-- Display Error Messages if Login Failed -->
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p> <!-- This will display the custom error message -->
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
             <!-- Login Form -->
-            <form method="post">
+            <form method="post" id="loginForm">
               {% csrf_token %}
+              <input type="hidden" name="next" value="{{ request.GET.next|default:request.path }}">
               <div class="mb-3">
-                <input type="hidden" name="next" value="{{ request.GET.next }}">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>
               </div>
@@ -85,10 +84,7 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
               </div>
-              {% if error %}
-                <div class="alert alert-danger" role="alert">{{ error }}</div>
-              {% endif %}
-              <button type="submit" class="btn login-btn">Login</button>
+              <button type="submit" class="btn login-btn" id="loginButton">Login</button>
             </form>
           </div>
           <div class="modal-footer">
@@ -108,14 +104,29 @@
             myModal.show();
         };
 
-        // Event listener for the Cancel button
+        // Ensure user explicitly submits the form
+        document.getElementById('loginForm').addEventListener('submit', function() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Only submit the form if username and password are provided
+            if (username && password) {
+                return true;  // Allow form submission
+            }
+            return false;  // Block form submission if fields are empty
+        });
+
+        // Cancel button: Hide modal and go back to previous page
         document.getElementById('cancelButton').addEventListener('click', function() {
-            // Hide the modal
             var modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
             modal.hide();
+            window.history.back();  // Go back to the previous page
+        });
+
+        // X button: Close modal and go back to previous page
+        document.getElementById('loginModal').addEventListener('hidden.bs.modal', function () {
+            window.history.back();  // Go back to the previous page
         });
     </script>
 </body>
 </html>
-
-

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LeagueScore</title>
     <link rel="stylesheet" href="{% static 'results/style.css' %}">
+    
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -21,7 +22,14 @@
                     <li><a href="#">Fixtures</a></li>
                     <li><a href="#">Results</a></li>
                     <li><a href="#">Tables</a></li>
-                    <li class="login-link"><a href="{% url 'login' %}">Login</a></li>
+                    {% if user.is_authenticated %}
+                    <li>Welcome, {{ user.username }}!</li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    
+                    {% endif %}
+                    
                 </ul>
             </nav>
         </div>
