@@ -12,6 +12,7 @@
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'premier_league' %}">Premier League</a></li>
+            <li><a href="{% url 'favourite_games' %}">Favourite Games</a></li>
             
             {% if user.is_authenticated %}
             <li>Welcome, {{ user.username }}!</li>

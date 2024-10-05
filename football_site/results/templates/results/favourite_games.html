@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Favorite Games</title>
+    <link rel="stylesheet" href="{% static 'results/team_detail.css' %}">  <!-- Update the path as necessary -->
+    <link rel="stylesheet" href="{% static 'results/style.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'premier_league' %}">Premier League</a></li>
+            <li><a href="{% url 'la_liga' %}">La Liga</a></li>
+            
+            {% if user.is_authenticated %}
+            <li>Welcome, {{ user.username }}!</li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+                
+            {% endif %}
+        
+        </ul>
+    </div>
+
+    <div class="team-header">
+        <h1>Your Favourite Games</h1>
+    </div>
+
+    <h2>Fixtures and Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Home Team</th>
+                <th>Away Team</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for favourite in favourite_games %}
+                <tr>
+                    <td>{{ favourite.match.date|date:"Y-m-d" }}</td>
+                    <td>
+                        <img src="{{ favourite.match.home_team.logo_url }}" alt="{{ favourite.match.home_team.name }} logo" class="team-logo">
+                        {{ favourite.match.home_team.name }}
+                    </td>
+                    <td>
+                        <img src="{{ favourite.match.away_team.logo_url }}" alt="{{ favourite.match.away_team.name }} logo" class="team-logo">
+                        {{ favourite.match.away_team.name }}
+                    </td>
+                    <td>
+                        {% if favourite.match.home_score is not None and favourite.match.away_score is not None %}
+                            {{ favourite.match.home_score }} - {{ favourite.match.away_score }}
+                        {% else %}
+                            vs
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No favourite games found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

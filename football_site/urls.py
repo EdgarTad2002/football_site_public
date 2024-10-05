@@ -15,10 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.contrib.auth import views as auth_views
+from django.urls import path, re_path
+from django.views.generic import RedirectView
 
-from .api import home_view, pl_views, laliga_views, teams, add_favourite, login_view, logout_view
+from .api import home_view, pl_views, laliga_views, teams, add_favourite, login_view, logout_view, show_favourites
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +29,8 @@ urlpatterns = [
     path('login/', login_view.CustomLoginView.as_view(), name='login'),
     path('logout/', logout_view.custom_logout, name='logout'),
     path('match/<int:match_id>/favourite', add_favourite.add_favourite_game, name='mark_favourite'),
-
+    path('favourite-games/', show_favourites.favourite_games_view, name="favourite_games"),
+    
+    re_path(r'^accounts/login/$', RedirectView.as_view(url='/login/')),
     #path('run/', pl.viewpl, name='viewpl')
 ]
