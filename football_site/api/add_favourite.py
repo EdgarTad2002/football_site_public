@@ -2,7 +2,6 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from ..results.favourite_games import FavouriteGame
 from ..results.matches import Match
-from django.db import IntegrityError
 
 @login_required
 def add_favourite_game(request, match_id):
