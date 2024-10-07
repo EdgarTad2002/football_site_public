@@ -7,11 +7,16 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
 def home(request):
-    premier_league_results = Match.objects.filter(home_team__league='Premier League', home_score__isnull=False, away_score__isnull=False).order_by('-date')[:5]
-    la_liga_results = Match.objects.filter(home_team__league='La Liga', home_score__isnull=False, away_score__isnull=False).order_by('-date')[:5]
+    last_pl_game = Match.objects.filter(home_team__league='Premier League', home_score__isnull=False, away_score__isnull=False).order_by('-date')[0]
+    last_laliga_game = Match.objects.filter(home_team__league='La Liga', home_score__isnull=False, away_score__isnull=False).order_by('-date')[0]
+
+    pl_matchday, laliga_matchday = last_pl_game.matchday, last_laliga_game.matchday
+
+    premier_league_results = Match.objects.filter(home_team__league='Premier League', matchday=pl_matchday)
+    la_liga_results = Match.objects.filter(home_team__league='La Liga', matchday=laliga_matchday)
     
-    premier_league_fixtures = Match.objects.filter(home_team__league='Premier League', home_score__isnull=True, away_score__isnull=True).order_by('date')[:5]
-    la_liga_fixtures = Match.objects.filter(home_team__league='La Liga', home_score__isnull=True, away_score__isnull=True).order_by('date')[:5]
+    premier_league_fixtures = Match.objects.filter(home_team__league='Premier League', matchday=pl_matchday+1)
+    la_liga_fixtures = Match.objects.filter(home_team__league='La Liga', matchday=laliga_matchday+1)
 
     premier_league_table = Team.objects.filter(league="Premier League").order_by('-points', '-goal_diff')[:3]
     la_liga_table = Team.objects.filter(league="La Liga").order_by('-points', '-goal_diff')[:3]

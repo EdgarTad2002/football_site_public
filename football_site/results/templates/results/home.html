@@ -56,13 +56,17 @@
             <div class="panel-content">
                 <!-- Latest Results -->
                 <div class="section">
-                    <h4>Latest Results</h4>
+                    <h4>Latest Matchday</h4>
                     <ul>
                         {% for match in premier_league_results %}
                         <li>
                             <span class="match">
                                 <img src="{{ match.home_team.logo_url }}" alt="{{ match.home_team.name }} logo" class="team-logo">
-                                {{ match.home_team.name }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team.name }}
+                                {% if match.home_score is not None and match.away_score is not None %}
+                                    {{ match.home_team.name }} {{ match.home_score }} - {{ match.away_score }} {{ match.away_team.name }}
+                                {% else %}
+                                    {{ match.home_team.name }} vs {{ match.away_team.name }}
+                                {% endif %}
                                 <img src="{{ match.away_team.logo_url }}" alt="{{ match.away_team.name }} logo" class="team-logo">
                             </span>
                         </li>
@@ -71,7 +75,7 @@
                 </div>
                 <!-- Fixtures -->
                 <div class="section">
-                    <h4>Upcoming Fixtures</h4>
+                    <h4>Upcoming Matchday</h4>
                     <ul>
                         {% for match in premier_league_fixtures %}
                         <li>
@@ -135,7 +139,7 @@
             <div class="panel-content">
                 <!-- Latest Results -->
                 <div class="section">
-                    <h4>Latest Results</h4>
+                    <h4>Latest Matchday</h4>
                     <ul>
                         {% for match in la_liga_results %}
                         <li>
@@ -150,7 +154,7 @@
                 </div>
                 <!-- Fixtures -->
                 <div class="section">
-                    <h4>Upcoming Fixtures</h4>
+                    <h4>Upcoming Matchday</h4>
                     <ul>
                         {% for match in la_liga_fixtures %}
                         <li>
